@@ -1,0 +1,35 @@
+players: DynArray[address, 100]
+losers: DynArray[address, 100]
+odds: uint256
+playersTurn: uint256
+creator: address
+
+@external
+def __init__():
+    self.creator = msg.sender
+
+@external
+def setOdds(oneInThisMany: uint256):
+    if msg.sender == self.creator:
+        self.odds = oneInThisMany
+
+@external
+def addPlayer(player: address):
+    sum: uint256 = 0
+    for i in self.players:
+        if i == player:
+            sum += 1
+    for i in self.losers:
+        if i == player:
+            sum += 1
+    if sum == 0:
+        self.players.append(player)
+
+@internal
+def lose(player: address):
+    self.players = []
+    self.losers.append(player)
+
+@external
+def random() -> (uint256):
+    
