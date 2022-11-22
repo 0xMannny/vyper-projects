@@ -7,6 +7,7 @@ creator: address
 @external
 def __init__():
     self.creator = msg.sender
+    self.playersTurn = 0
 
 @external
 def setOdds(oneInThisMany: uint256):
@@ -31,5 +32,20 @@ def lose(player: address):
     self.losers.append(player)
 
 @external
-def random() -> (uint256):
-    
+def random():
+    # logic goes here
+
+@external
+def play():
+    # logic goes here
+
+@external
+def isALoser(player: address) -> (bool):
+    sum: uint256 = 0
+    for i in self.losers:
+        if i == player:
+            sum += 1
+    if sum == 0:
+        return False
+    else:
+        return True
