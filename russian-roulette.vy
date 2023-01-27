@@ -17,13 +17,7 @@ def setOdds(oneInThisMany: uint256):
 @external
 def addPlayer(player: address):
     sum: uint256 = 0
-    for i in self.players:
-        if i == player:
-            sum += 1
-    for i in self.losers:
-        if i == player:
-            sum += 1
-    if sum == 0:
+    if player not in losers:
         self.players.append(player)
 
 @internal
